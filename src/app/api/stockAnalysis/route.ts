@@ -20,19 +20,22 @@ export async function POST(req: Request) {
     );
   }
 
-  const prompt = `You are an international stock analyst. Analyze the stock ${stock} and provide details on investment volume, trading volume, value, profitability, risk, investment index, growth, dividend yield, and stock price.`;
+  // const prompt = `You are an international stock analyst. Analyze the stock ${stock} and provide details on investment volume, trading volume, value, profitability, risk, investment index, growth, dividend yield, and stock price. Additionally, translate the analysis into Korean.`;
+  const prompt = `You are an international stock analyst. Analyze the stock ${stock} and provide details on investment volume, trading volume, value, profitability, risk, investment index, growth, dividend yield, and stock price. Provide the analysis in English and then translate the entire analysis into Korean.`;
 
   try {
     const response = await openai.chat.completions.create({
-      // model: "gpt-3.5-turbo",
-      model: "text-curie-001", // 무료 티어에서 사용할 수 있는 모델로 변경
+      model: "gpt-3.5-turbo",
+      // model: "text-curie-001", // 무료 티어에서 사용할 수 있는 모델로 변경
       messages: [{ role: "user", content: prompt }],
       max_tokens: 200,
     });
     console.log(response, "response");
-    const analysis = response.choices[0]?.message?.content;
+    const analysis = response.choices[0]?.message?.content || '';
+    const formattedAnalysis = analysis.replace(/\n/g, '<br>');
+
     console.log(analysis, "analysis");
-    return NextResponse.json({ analysis });
+    return NextResponse.json({ analysis : formattedAnalysis });
   } catch (error) {
     console.error("Error fetching stock analysis:", error);
 

@@ -33,7 +33,7 @@ export default function Stock() {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="flex flex-col container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Stock Analysis</h1>
       <form onSubmit={onSubmit} className="flex gap-2">
         <input
@@ -46,10 +46,11 @@ export default function Stock() {
           Analyze
         </button>
         {error && <p className="text-red-500 mt-4">{error}</p>}
-        {result && (
-          <div className="mt-4 p-4 border rounded bg-gray-100">{result}</div>
-        )}
       </form>
+      {result && (
+          // <div className="mt-4 p-4 border rounded bg-gray-100">{result}</div>
+          <div className="mt-4 p-4 border rounded bg-gray-100"  dangerouslySetInnerHTML={{ __html: result }}></div>
+        )}
     </div>
   );
 }
