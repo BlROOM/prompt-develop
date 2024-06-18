@@ -1,4 +1,4 @@
-import Stock from "./Stock/page";
+import Stock from "../components/StockForm";
 
 export default async function Home() {
   return (
