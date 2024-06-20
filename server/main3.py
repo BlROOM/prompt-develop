@@ -83,6 +83,6 @@ message_history = ChatMessageHistory()
 # 질의에 대한 답변을 출력합니다.
 # 검색 결과를 요청 후 질문에 대한 답변을 출력합니다.
 response = llama3_agent_executor.invoke(
-    {"input": "2024년 6월 19일 현 시각을 기점으로 해외 주식 Tesla 주가에 대해서 한국어로 번역해줄래"}
+    {"input": "2024년 6월 20일 현 시각을 기점으로 해외 주식 Tesla 주가에 대해서 한국어로 번역해줄래"}
 )
 print(f'답변: {response["output"]}')
